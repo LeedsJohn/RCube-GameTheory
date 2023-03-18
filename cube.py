@@ -103,7 +103,3 @@ class Cube:
         res.append(f"{' ' * 8}| {self.cube[po[22]]} {self.cube[po[23]]} |")
         res.append(f"{' ' * 9}-----")
         return "\n".join(res)
-
-john = Cube()
-john.move("R U")
-print(john)
