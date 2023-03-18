@@ -51,7 +51,8 @@ class Cube:
         current state.
         """
         solution = sv.solve(self.get_cubestring())
-        start, end = solution.find("("), solution.find("f")
+        paren = "()"[0] # my editor was doing weird things with parenthesis
+        start, end = solution.find(paren), solution.find("f")
         return int(solution[start + 1:end])
 
     def move(self, rotations: str) -> None:
