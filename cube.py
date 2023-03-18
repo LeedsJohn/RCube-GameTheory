@@ -2,6 +2,7 @@
 # 3/18/2023
 # cube.py
 # Rubik's Cube class to interact with Herbert Kociemba's 2x2x2 solver
+from rotations import *
 
 class Cube:
     # Representation of the cube (taken from Herbert Kociemba's enums.py)
@@ -42,7 +43,9 @@ class Cube:
         """
         Receives a string of rotations and applies the rotations to the cube.
         """
-        return
+        moves = self.__parse_scramble(rotations)
+        for move in moves:
+            self.__rotate(move)
     
     def __parse_scramble(self, scramble: str) -> [str]:
         """
@@ -50,16 +53,59 @@ class Cube:
         Returns a list of each individual move in common notation.
         Ex: "R U R' U'" -> ["R", "U", "R'", "U'"]
         """
-        return
+        res = []
+        for i, c in enumerate(scramble[:-1]):
+            if c in "RUFLDB": # valid moves
+                # apply rotation once for clockwise, twice for double move,
+                # three times for counterclockwise rotation
+                res.append(c)
+                if scramble[i + 1] in "2'":
+                    res.append(c)
+                if scramble[i + 1] == "'":
+                    res.append(c)
+        if scramble[-1] in "RUFLDB":
+            res.append(scramble[-1])
+        return res
     
     def __rotate(self, rotation: str) -> None:
         """
         Receives a string representing one move to the Rubik's Cube.
         Applies the move to the cube.
         """
-        return
+        for pattern in ROTATIONS[rotation].patterns:
+            temp = self.cube[pattern[3]]
+            for i in range(3, 0, -1):
+                self.cube[pattern[i]] = self.cube[pattern[i - 1]]
+            self.cube[pattern[0]] = temp
     
     def __str__(self) -> None:
         """
         Overload to print visual representation of the Rubik's Cube
         """
+        # please forgive my lazy programming. At least most of it what copy / pasted
+        # print order
+        po = [
+                0, 1, 2, 3,
+                16, 17, 8, 9, 4, 5, 20, 21, 18, 19, 10, 11, 6, 7, 22, 23,
+                12, 13, 14, 15
+                ]
+        res = []
+        res.append(f"{' ' * 9}-----")
+        res.append(f"{' ' * 8}| {self.cube[po[0]]} {self.cube[po[1]]} |")
+        res.append(f"{' ' * 8}| {self.cube[po[2]]} {self.cube[po[3]]} |")
+        res.append(f"{' ' * 9}-----")
+        res.append(" -----   -----   -----   -----")
+        for i in [4, 12]:
+            res.append(f"| {self.cube[po[i]]} {self.cube[po[i + 1]]} | | {self.cube[po[i + 2]]} {self.cube[po[i + 3]]} | | {self.cube[po[i + 4]]} {self.cube[po[i + 5]]} | | {self.cube[po[i + 6]]} {self.cube[po[i + 7]]} |")
+        res.append(" -----   -----   -----   -----")
+        res.append(f"{' ' * 9}-----")
+        res.append(f"{' ' * 8}| {self.cube[po[20]]} {self.cube[po[21]]} |")
+        res.append(f"{' ' * 8}| {self.cube[po[22]]} {self.cube[po[23]]} |")
+        res.append(f"{' ' * 9}-----")
+        return "\n".join(res)
+
+for move in "RUFLDB":
+    print(f"-----------------\nMove: {move}\n")
+    john = Cube()
+    john.move(move)
+    print(john)
