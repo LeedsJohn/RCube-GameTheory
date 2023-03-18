@@ -55,6 +55,14 @@ class Cube:
         start, end = solution.find(paren), solution.find("f")
         return int(solution[start + 1:end])
 
+    def get_solution(self) -> [str]:
+        """
+        Returns an optimal solution to the cube
+        """
+        solution = sv.solve(self.get_cubestring())
+        paren = "()"[0] # same as above, typing open paren does weird things
+        return solution[:solution.find(paren)]
+
     def move(self, rotations: str) -> None:
         """
         Receives a string of rotations and applies the rotations to the cube.
@@ -134,3 +142,7 @@ class Cube:
         res.append(f"{' ' * 8}| {self.cube[po[22]]} {self.cube[po[23]]} |")
         res.append(f"{' ' * 9}-----")
         return "\n".join(res)
+
+john = Cube()
+john.scramble()
+john.get_solution()
