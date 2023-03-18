@@ -104,8 +104,6 @@ class Cube:
         res.append(f"{' ' * 9}-----")
         return "\n".join(res)
 
-for move in "RUFLDB":
-    print(f"-----------------\nMove: {move}\n")
-    john = Cube()
-    john.move(move)
-    print(john)
+john = Cube()
+john.move("R U")
+print(john)
