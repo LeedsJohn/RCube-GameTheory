@@ -97,11 +97,12 @@ class Cube:
             if c in "RUFLDB": # valid moves
                 # apply rotation once for clockwise, twice for double move,
                 # three times for counterclockwise rotation
+                if scramble[i + 1].isnumeric():
+                    res.extend([c] * int(scramble[i + 1]))
+                    continue
                 res.append(c)
-                if scramble[i + 1] in "2'":
-                    res.append(c)
                 if scramble[i + 1] == "'":
-                    res.append(c)
+                    res.extend([c, c])
         if scramble[-1] in "RUFLDB":
             res.append(scramble[-1])
         return res
@@ -142,7 +143,3 @@ class Cube:
         res.append(f"{' ' * 8}| {self.cube[po[22]]} {self.cube[po[23]]} |")
         res.append(f"{' ' * 9}-----")
         return "\n".join(res)
-
-john = Cube()
-john.scramble()
-john.get_solution()
