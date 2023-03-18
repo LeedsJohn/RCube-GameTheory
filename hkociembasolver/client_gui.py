@@ -1,9 +1,9 @@
 # ################ A simple graphical interface which communicates with the server #####################################
 
 from tkinter import *
-import socket
-import face
-import cubie
+import hkociembasolver.socket as socket
+import hkociembasolver.face as face
+import hkociembasolver.cubie as cubie
 
 # ################################ Edit the following line to use different colors #####################################
 cols = ("yellow", "green", "red", "white", "blue", "orange")

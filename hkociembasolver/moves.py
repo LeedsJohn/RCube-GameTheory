@@ -2,9 +2,9 @@
 
 from os import path
 import array as ar
-import cubie as cb
-import enums
-from defs import N_TWIST, N_CORNERS, N_MOVE
+import hkociembasolver.cubie as cb
+import hkociembasolver.enums as enums
+from hkociembasolver.defs import N_TWIST, N_CORNERS, N_MOVE
 
 a = cb.CubieCube()
 # ############################ Move table for the the corners. ##################################

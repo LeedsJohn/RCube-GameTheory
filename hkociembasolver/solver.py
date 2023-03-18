@@ -1,11 +1,11 @@
 # ###################### The solve function computes all optimal solving maneuvers #####################################
-import face
-import cubie
-import coord
-import enums as en
-import moves as mv
-import pruning as pr
-from defs import N_TWIST
+import hkociembasolver.face as face
+import hkociembasolver.cubie as cubie
+import hkociembasolver.coord as coord
+import hkociembasolver.enums as en
+import hkociembasolver.moves as mv
+import hkociembasolver.pruning as pr
+from hkociembasolver.defs import N_TWIST
 
 solutions = []
 

@@ -1,9 +1,9 @@
 # ##################### The pruning table cuts the search tree during the search. ######################################
 # ########################## In this case it it gives the exact distance to the solved state. ##########################
 
-import defs
-import enums
-import moves as mv
+import hkociembasolver.defs as defs
+import hkociembasolver.enums as enums
+import hkociembasolver.moves as mv
 from os import path
 import array as ar
 

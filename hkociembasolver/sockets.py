@@ -1,9 +1,9 @@
 # ################## The code of the server socket which communicates with the client ##################################
 
-import socket
+import hkociembasolver.socket as socket
 import sys
 import threading
-import solver
+import hkociembasolver.solver as solver
 import time
 
 
