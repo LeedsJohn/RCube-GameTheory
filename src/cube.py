@@ -46,6 +46,21 @@ class Cube:
         moves = self.__parse_scramble(rotations)
         for move in moves:
             self.__rotate(move)
+
+    def is_solved(self) -> bool:
+        """
+        Returns true if the cube is solved.
+        """
+        for i in range(0, 24, 4):
+            if len(set(self.cube[i:i + 4])) != 1:
+                return False
+        return True
+
+    def get_cubestring(self) -> str:
+        """
+        Returns a cubestring to be used with the solver
+        """
+        return "".join(self.cube)
     
     def __parse_scramble(self, scramble: str) -> [str]:
         """
