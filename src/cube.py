@@ -2,7 +2,10 @@
 # 3/18/2023
 # cube.py
 # Rubik's Cube class to interact with Herbert Kociemba's 2x2x2 solver
+import random
+import hkociembasolver.solver as sv
 from rotations import *
+
 
 class Cube:
     # Representation of the cube (taken from Herbert Kociemba's enums.py)
@@ -33,11 +36,23 @@ class Cube:
         for side in "URFDLB":
             self.cube.extend([side] * 4)
 
-    def scramble(self):
+    def scramble(self, moves = 100):
         """
         Scrambles the Rubik's Cube with random moves.
         """
-        return
+        for _ in range(moves):
+            direction = random.choice("RUFLDB")
+            for i in range(random.randrange(1, 4)):
+                self.move(direction)
+
+    def get_distance(self) -> int:
+        """
+        Returns the number of moves it takes to solve the cube in its
+        current state.
+        """
+        solution = sv.solve(self.get_cubestring())
+        start, end = solution.find("("), solution.find("f")
+        return int(solution[start + 1:end])
 
     def move(self, rotations: str) -> None:
         """
